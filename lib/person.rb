@@ -12,53 +12,55 @@ class Person
 	end
 
 	def happiness=(value)
-		@happiness =
-		if value > 10
-			10
-		elsif value < 0
-			0
-		else
-			value
-		end
+		@happiness = value.clamp(0, 10)
+		# @happiness =
+		# if value > 10
+		# 	10
+		# elsif value < 0
+		# 	0
+		# else
+		# 	value
+		# end
 	end
 
 	def hygiene=(value)
-		@hygiene =
-		if value > 10
-			10
-		elsif value < 0
-			0
-		else
-			value
-		end
+		@hygiene = value.clamp(0, 10)
+		# @hygiene =
+		# if value > 10
+		# 	10
+		# elsif value < 0
+		# 	0
+		# else
+		# 	value
+		# end
 	end
 
 	def happy?
-		self.happiness > 7
+		@happiness > 7
 	end
 
 	def clean?
-		self.hygiene > 7
+		@hygiene > 7
 	end
 
 	def get_paid(amount)
-		@bank_account += amount
+		self.bank_account += amount
 		"all about the benjamins"
 	end
 
 	def take_bath
-		self.hygiene += 4
+		@hygiene = @hygiene + 4
 		"♪ Rub-a-dub just relaxing in the tub ♫"
 	end
 
 	def work_out
-		self.hygiene -= 3
-		self.happiness += 2
+		@hygiene = @hygiene - 3
+		@happiness = @hygiene + 2
 		"♪ another one bites the dust ♫"
 	end
 
 	def call_friend(friend)
-		self.happiness += 3
+		@happiness = @happiness + 3
 		friend.happiness += 3
 		"Hi #{friend.name}! It's #{self.name}. How are you?"
 	end
@@ -66,11 +68,11 @@ class Person
 	def start_conversation(friend, topic)
 		case topic
 		when "politics"
-			self.happiness -= 2
+			@happiness = @happiness + 2
 			friend.happiness -= 2
 			"blah blah partisan blah lobbyist"
 		when "weather"
-			self.happiness += 1
+			@happiness = @happiness + 1
 			friend.happiness += 1
 			"blah blah sun blah rain"
 		else
